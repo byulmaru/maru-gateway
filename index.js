@@ -75,7 +75,7 @@ module.exports = (settings) => {
 							});
 						}
 						else {
-							new MaruResult(501, {error: 'Invalid server config'});
+							new MaruResult(501, {error: 'Invalid server config'}).cookResult(res);
 						}
 					};
 					switch($this.method) {
