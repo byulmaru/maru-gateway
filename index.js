@@ -20,41 +20,43 @@ module.exports = (settings) => {
 					const $this = settings.path[f];
 					let requestObject = {};
 					let worker = (req, res) => {
-						for(let n in $this.requests) {
-							if($this.requests.hasOwnProperty(n)) {
-								let value;
-								const sourceName = $this.requests[n].name || n;
-								switch($this.requests[n].source) {
-									case 'query':
-										value = req.query[sourceName];
-										break;
-									case 'url':
-										value = req.params[sourceName];
-										break;
-									case 'header':
-										value = req.get(sourceName);
-										break;
-									case 'body':
-									default:
-										value = req.body[sourceName];
-										break;
-								}
-								if(!value) {
-									if(!$this.requests[n].optional) {
-										new MaruResult(400, {error: 'Missing variable', variableName: sourceName}).cookResult(res);
-										return;
+						if($this.hasOwnProperty('requests')) {
+							for(let n in $this.requests) {
+								if($this.requests.hasOwnProperty(n)) {
+									let value;
+									const sourceName = $this.requests[n].name || n;
+									switch($this.requests[n].source) {
+										case 'query':
+											value = req.query[sourceName];
+											break;
+										case 'url':
+											value = req.params[sourceName];
+											break;
+										case 'header':
+											value = req.get(sourceName);
+											break;
+										case 'body':
+										default:
+											value = req.body[sourceName];
+											break;
+									}
+									if(!value) {
+										if(!$this.requests[n].optional) {
+											new MaruResult(400, {error: 'Missing variable', variableName: sourceName}).cookResult(res);
+											return;
+										}
+										else {
+											continue;
+										}
+									}
+									if(validate(value, $this.requests[n])) {
+										requestObject[n] = value;
 									}
 									else {
-										continue;
-									}
-								}
-								if(validate(value, $this.requests[n])) {
-									requestObject[n] = value;
-								}
-								else {
-									if(!$this.requests[n].optional) {
-										new MaruResult(400, {error: 'Invalid variable', variableName: sourceName}).cookResult(res);
-										return;
+										if(!$this.requests[n].optional) {
+											new MaruResult(400, {error: 'Invalid variable', variableName: sourceName}).cookResult(res);
+											return;
+										}
 									}
 								}
 							}
