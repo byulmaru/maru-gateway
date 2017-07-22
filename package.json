@@ -1,0 +1,17 @@
+{
+  "name": "maru-gateway",
+  "version": "0.0.1",
+  "description": "An API gateway module by Byulmaru Labs",
+  "main": "index.js",
+  "repository": "https://github.com/byulmaru/maru-gateway.git",
+  "author": "robin* <robin_maki@planet.moe>",
+  "engines": {
+    "node": ">=7.0"
+  },
+  "license": "MIT",
+  "dependencies": {
+    "body-parser": "^1.17.2",
+    "express": "^4.15.3",
+    "validator": "^8.0.0"
+  }
+}
