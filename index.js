@@ -50,7 +50,7 @@ module.exports = (settings) => {
 										}
 									}
 									if(validate(value, $this.requests[n])) {
-										requestObject[n] = value;
+										requestObject[n] = $this.requests[n].type !== 'number' ? value : Number(value);
 									}
 									else {
 										if(!$this.requests[n].optional) {
