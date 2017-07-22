@@ -1,8 +1,8 @@
 class MaruResult {
 	/**
 	 * Create a MaruResult object.
-	 * @param {Number} [code=200] - HTTP status code to return.
-	 * @param {Object} [content] - An object to return.
+	 * @param {Number} [code] - HTTP status code to return.
+	 * @param {Object} content - An object to return.
 	 */
 	constructor(code, content) {
 		if(content === undefined) {
