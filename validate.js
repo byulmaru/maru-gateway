@@ -9,7 +9,7 @@ module.exports = (value, rule) => {
 		case 'string':
 			return validator.isLength(value, {min: rule.min, max: rule.max});
 		case 'uuid':
-			return validator.isUUID(val);
+			return validator.isUUID(value);
 		default:
 			console.warn(`Unknown type ${rule.type}`);
 			return true;
