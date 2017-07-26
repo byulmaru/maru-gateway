@@ -15,11 +15,11 @@ module.exports = (settings) => {
 			functions[name] = pm;
 		},
 		start(port) {
-			for(let f in settings.path) {
-				if(settings.path.hasOwnProperty(f)) {
-					for(let m in settings.path[f]) {
-						if(settings.path[f].hasOwnProperty(m)) {
-							const $this = settings.path[f][m];
+			for(let f in settings) {
+				if(settings.hasOwnProperty(f)) {
+					for(let m in settings[f]) {
+						if(settings[f].hasOwnProperty(m)) {
+							const $this = settings[f][m];
 							let requestObject = {};
 							let worker = (req, res) => {
 								if($this.hasOwnProperty('requests')) {
