@@ -9,9 +9,15 @@
     "node": ">=7.0"
   },
   "license": "MIT",
+  "bin": {
+    "maru-setting": "./setting/maru-setting"
+  },
   "dependencies": {
     "body-parser": "^1.17.2",
     "express": "^4.15.3",
     "validator": "^8.0.0"
+  },
+  "devDependencies": {
+    "opn": "^5.1.0"
   }
 }

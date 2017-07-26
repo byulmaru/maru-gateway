@@ -1,0 +1,34 @@
+#!/usr/bin/env node
+
+const express = require('express');
+const fs = require('fs');
+const opn = require('opn');
+const path = require('path');
+const bodyParser = require('body-parser');
+
+const app = express();
+
+app.use(bodyParser.json());
+
+app.get('/update', (req, res) => {
+	fs.readFile('./gateway.json', (err, data) => {
+		if(!err) {
+			res.send(data);
+		}
+		else {
+			res.json({});
+		}
+	})
+});
+app.post('/update', (req, res) => {
+	fs.writeFile('./gateway.json', JSON.stringify(req.body), (err) => {
+		res.json({success: !err});
+	})
+});
+
+app.use('/', express.static(path.resolve(__dirname, 'public')));
+
+app.listen(18326, () => {
+	console.info('Listening on http://localhost:18326');
+	opn('http://localhost:18326');
+});
