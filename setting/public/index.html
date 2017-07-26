@@ -1,0 +1,57 @@
+<html>
+<head>
+<link rel="stylesheet" href="css/bootstrap.min.css">
+<link rel="stylesheet" href="css/main.css">
+</head>
+<body>
+<div id="main" class="container">
+	<h1>maru-gateway 설정</h1>
+	<template v-for="(methods, path) in setting">
+		<div class="panel panel-default" v-for="(data, method) in methods">
+			<div class="panel-heading"><span class="label" :class="styleBadge(method)">{{method.toUpperCase()}}</span> {{path}}</div>
+			<div class="panel-body">
+				<h2>인수 목록</h2>
+				<table class="table">
+					<tr>
+						<th>변수명</th>
+						<th>타입</th>
+						<th>위치</th>
+						<th>원본 인수명</th>
+						<th>선택변수 여부</th>
+					</tr>
+					<tr v-for="(prop, name) in data.requests">
+						<td><p class="form-control-static">{{name}}</p></td>
+						<td>
+							<select class="form-control" v-model="prop.type">
+								<option>string</option>
+								<option>number</option>
+								<option>email</option>
+								<option>uuid</option>
+							</select>
+						</td>
+						<td>
+							<select class="form-control" v-model="prop.source">
+								<option>body</option>
+								<option>query</option>
+								<option>url</option>
+								<option>header</option>
+							</select>
+						</td>
+						<td><input type="text" class="form-control" v-model="prop.name"></td>
+						<td><input type="checkbox" v-model="prop.optional"></td>
+					</tr>
+				</table>
+				<span class="form-inline">
+					<input type="text" class="form-control" v-model="newRequest">
+				</span>
+				<button type="button" class="btn btn-success" @click="addRequests(data.requests, newRequest)">새로운 인수 추가</button>
+			</div>
+		</div>
+	</template>
+</div>
+<script src="js/jquery.min.js"></script>
+<script src="js/bootstrap.min.js"></script>
+<script src="js/vue.js"></script>
+<script src="js/main.js"></script>
+</body>
+</html>
