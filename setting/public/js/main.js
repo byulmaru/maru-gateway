@@ -19,6 +19,7 @@ let app = new Vue({
 		addRequests(prop, name) {
 			if(name) {
 				this.$set(prop, name, {type: 'string', source: 'body', name, optional: false});
+				this.newRequest = '';
 			}
 		}
 	}
