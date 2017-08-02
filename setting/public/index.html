@@ -18,6 +18,7 @@
 						<th>위치</th>
 						<th>원본 인수명</th>
 						<th>선택변수 여부</th>
+						<th>삭제</th>
 					</tr>
 					<tr v-for="(prop, name) in data.requests">
 						<td><p class="form-control-static">{{name}}</p></td>
@@ -39,12 +40,13 @@
 						</td>
 						<td><input type="text" class="form-control" v-model="prop.name"></td>
 						<td><input type="checkbox" v-model="prop.optional"></td>
+						<td><button type="button" class="close" aria-label="Close" @click="deleteRequest(data, name)"><span aria-hidden="true">&times;</span></button></td>
 					</tr>
 				</table>
 				<span class="form-inline">
 					<input type="text" class="form-control" v-model="newRequest">
 				</span>
-				<button type="button" class="btn btn-success" @click="addRequests(data.requests, newRequest)">새로운 인수 추가</button>
+				<button type="button" class="btn btn-success" @click="addRequest(data.requests, newRequest)">새로운 인수 추가</button>
 			</div>
 		</div>
 	</template>

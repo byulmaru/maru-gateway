@@ -16,11 +16,14 @@ let app = new Vue({
 					return 'label-warning';
 			}
 		},
-		addRequests(prop, name) {
+		addRequest(prop, name) {
 			if(name) {
 				this.$set(prop, name, {type: 'string', source: 'body', name, optional: false});
 				this.newRequest = '';
 			}
+		},
+		deleteRequest(data, name) {
+			Vue.delete(data.requests, name);
 		}
 	}
 });
