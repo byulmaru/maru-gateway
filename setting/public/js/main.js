@@ -1,7 +1,7 @@
 let app = new Vue({
 	el: '#main',
 	data: {
-		setting: {}, newRequest: ''
+		setting: {}, newRequest: '', newURL: '/', newMethod: 'get'
 	},
 	methods: {
 		styleBadge(method) {
@@ -24,6 +24,14 @@ let app = new Vue({
 		},
 		deleteRequest(data, name) {
 			Vue.delete(data.requests, name);
+		},
+		addURL() {
+			if(!this.setting[this.newURL]) {
+				this.$set(this.setting, this.newURL, {});
+			}
+			this.$set(this.setting[this.newURL], this.newMethod, {requests: {}, func: ''});
+			this.newURL = '/';
+			this.newMethod = 'get';
 		}
 	}
 });

@@ -50,6 +50,16 @@
 			</div>
 		</div>
 	</template>
+	<span class="form-inline">
+		<select class="form-control" v-model="newMethod">
+			<option>get</option>
+			<option>post</option>
+			<option>put</option>
+			<option>delete</option>
+		</select>
+		<input type="text" class="form-control" v-model="newURL">
+	</span>
+	<button type="button" class="btn btn-success" @click="addURL()">새로운 경로 추가</button>
 </div>
 <script src="js/jquery.min.js"></script>
 <script src="js/bootstrap.min.js"></script>
